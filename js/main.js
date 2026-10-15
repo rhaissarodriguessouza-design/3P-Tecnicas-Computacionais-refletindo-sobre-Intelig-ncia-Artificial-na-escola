@@ -7,13 +7,15 @@ const botaoJogarNovamente = document.querySelector(".novamente-btn");
 import {aleatorio} from './aleatorio.js';
 import {perguntas} from './perguntas.js';
 
-botaoJogarNovamente.addEventListener("click", () => {
+botaoJogarNovamente.addEventListener("click", jogaNovamente);
+
+function jogaNovamente() {
     atual = 0;
     historiaFinal = "";
     textoResultado.textContent = "";
-    botaoJogarNovamente.hidden = true;
+    caixaResultado.classList.remove("mostrar");
     mostraPergunta();
-});
+}
 
 let atual = 0; 
 let perguntaAtual;
@@ -40,8 +42,7 @@ function mostraAlternativas(){
 }
 
 function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
+    historiaFinal += aleatorio(opcaoSelecionada.afirmacao) + " ";
     atual++;
     mostraPergunta();
 }
@@ -50,7 +51,8 @@ function mostraResultado() {
     caixaPerguntas.textContent = "Em 2049...";
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
-    botaoJogarNovamente.hidden = false;
+    caixaResultado.classList.add("mostrar");
 }
 
 mostraPergunta();
+
